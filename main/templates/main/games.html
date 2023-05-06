@@ -1,0 +1,21 @@
+{% extends 'main/template.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1 style="text-align: center"> Игры </h1>
+    {% if games %}
+        <div style="text-align: center">
+            {% for el in games %}
+                <div>
+                    <h3> {{ el.title }}</h3>
+                    <p> {{ el.description }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>У нас нет записей!</p>
+    {% endif %}
+{% endblock %}
