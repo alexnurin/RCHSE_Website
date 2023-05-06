@@ -36,8 +36,16 @@ def create_game(request):
 
 
 def game_site(request):
-    result = ''
-    for el in request.GET.iteritems:
-        result += el + '\n'
+    game_id = request.GET.get('id')
 
-    return render(request, )
+    this_game = Games.objects.filter(id=game_id)
+    if this_game:
+        this_game = this_game[0]
+    else:
+        this_game = "empty"
+
+    context = {
+        'game_id': game_id,
+        'this_game': this_game
+    }
+    return render(request, 'main/game_site.html', context)
