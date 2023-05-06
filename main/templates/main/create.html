@@ -1,0 +1,18 @@
+{% extends 'main/template.html' %}
+
+{% block title %}
+О нас
+{% endblock %}
+
+{% block content %}
+<h1> Создать таск </h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.name }}<br>
+    {{ form.description }}<br>
+    <button type="submit" class="btn btn-success">Добавить</Добавить></button>
+    <br>
+    <span>{{error}}</span>
+</form>
+
+{% endblock %}
