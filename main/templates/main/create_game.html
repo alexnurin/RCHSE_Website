@@ -6,10 +6,9 @@
 
 {% block content %}
     <h1> Создать игру </h1>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.title }}<br>
-        {{ form.description }}<br>
+        {{ form.as_p }}<br>
         <button type="submit" class="btn btn-success">Добавить</button>
         <br>
         <span>{{ error }}</span>

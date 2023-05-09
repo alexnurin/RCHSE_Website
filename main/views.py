@@ -4,8 +4,12 @@ from .forms import UsersForm, GamesForm
 
 
 def index(request):
+    return render(request, 'main/main.html', {'title': 'Главная страница сайта'})
+
+
+def users(request):
     users = Users.objects.order_by('-id')
-    return render(request, 'main/main.html', {'title': 'Главная страница сайта', 'users': users})
+    return render(request, 'main/users.html', {'title': 'Пользователи', 'users': users})
 
 
 def games(request):
@@ -20,7 +24,7 @@ def about(request):
 def create_game(request):
     error = ''
     if request.method == 'POST':
-        form = GamesForm(request.POST)
+        form = GamesForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('home')
@@ -35,7 +39,7 @@ def create_game(request):
     return render(request, 'main/create_game.html', context)
 
 
-def game_site(request):
+def game(request):
     game_id = request.GET.get('id')
 
     this_game = Games.objects.filter(id=game_id)

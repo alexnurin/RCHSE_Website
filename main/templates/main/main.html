@@ -6,14 +6,5 @@
 
 {% block content %}
     <h1> Главная страница</h1>
-    {% if users %}
-        {% for el in users %}
-            <div class="alert alert-warning mt-2">
-                <h3> {{ el.name }}</h3>
-                <p> {{ el.email }}</p>
-            </div>
-        {% endfor %}
-    {% else %}
-        <p>У нас нет записей!</p>
-    {% endif %}
+    <h2> Самая главная, если что.</h2>
 {% endblock %}

@@ -21,7 +21,7 @@ class UsersForm(ModelForm):
 class GamesForm(ModelForm):
     class Meta:
         model = Games
-        fields = ['title', 'description']
+        fields = ['title', 'description', 'image']
         widgets = {
             'title': TextInput(attrs={
                 'class': 'form-control',

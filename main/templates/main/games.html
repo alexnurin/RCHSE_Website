@@ -1,5 +1,6 @@
 {% extends 'main/template.html' %}
-
+{% load static %}
+{% get_media_prefix %}
 {% block title %}
     {{ title }}
 {% endblock %}
@@ -7,15 +8,22 @@
 {% block content %}
     <h1 style="text-align: center"> Игры </h1>
     {% if games %}
-        <div style="text-align: center">
+        <div class="navitems_plates" style="text-align: center">
             {% for el in games %}
-                <div>
-                    <h3> {{ el.title }}</h3>
-                    <p> {{ el.description }}</p>
+                <div class="navitems_plate">
+                    <a href="{% url 'game' %}?id={{ el.id }}" class="nav-link">
+                        <div class="navitems_plate_more">
+                            <div class="navitems_plate_name"> {{ el.title }}</div>
+                        </div>
+                        <div class="navitems_plate_avatar"><img src="{{ el.image.url }}"></div>
+                    </a>
                 </div>
             {% endfor %}
         </div>
     {% else %}
-        <p>У нас нет записей!</p>
+        <p>Игры отсутствуют!</p>
     {% endif %}
 {% endblock %}
+
+
+
