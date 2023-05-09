@@ -13,7 +13,7 @@ def users(request):
 
 
 def games(request):
-    games_list = Games.objects.order_by('-id')
+    games_list = Games.objects.order_by('id')
     return render(request, 'main/games.html', {'title': 'Все игры', 'games': games_list})
 
 

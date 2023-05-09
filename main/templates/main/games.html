@@ -15,7 +15,7 @@
                         <div class="navitems_plate_more">
                             <div class="navitems_plate_name"> {{ el.title }}</div>
                         </div>
-                        <div class="navitems_plate_avatar"><img src="{{ el.image.url }}"></div>
+                        <div class="navitems_plate_avatar"><img src="{{ MEDIA_ROOT }}{{ el.image.url }}"></div>
                     </a>
                 </div>
             {% endfor %}
