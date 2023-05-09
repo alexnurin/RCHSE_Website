@@ -1,4 +1,5 @@
 from django.db import models
+from django_resized import ResizedImageField
 
 
 class Users(models.Model):
@@ -16,7 +17,7 @@ class Users(models.Model):
 class Games(models.Model):
     title = models.CharField('Название', max_length=50)
     description = models.TextField('Описание')
-    image = models.ImageField(upload_to='img/')
+    image = ResizedImageField(size=[300, 300], upload_to='img/')
 
     def __str__(self):
         return self.title
