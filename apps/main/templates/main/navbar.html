@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+          crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="{% static '/css/common.css' %}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{% static '/css/fonts.css' %}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'css/navbar.css' %}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{% static '/css/base.css' %}"/>
+    {% block extrahead %}
+    {% endblock %}
+
+
+    <title>Карьерный ассистент</title>
+    <script type="text/javascript"
+            src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="text/javascript"
+            src="https://unpkg.com/headroom.js@0.12.0/dist/headroom.min.js"></script>
+
+</head>
+
+<body style="display: flex; flex-grow: 1">
+<main class="main-page layout main_section">
+    <div class="layout navbar_box">
+        <div class="navbar_box_item" onclick="home()">
+            <div style="display: flex; flex-grow: 1"
+                 class="layout navbar_arrows">
+            </div>
+            <div class="navbar_spacer"></div>
+            <h4 class="layout navbar_title" onclick="home()">
+                Ассистент
+            </h4>
+        </div>
+        <div class="navbar_long_spacer"></div>
+        {% if username != "None" %}
+            <div class="navbar_avatar_box">
+                <h4 class="layout navbar_title">
+                    {{ username }}
+                </h4>
+                <div onclick="profile()"
+                     style="display: flex; flex-grow: 1"
+                     class="layout navbar_avatar">
+                </div>
+            </div>
+        {% else %}
+            <h4 class="layout navbar_title_underline" onclick="login()">
+                Вход
+            </h4>
+            <div class="layout0 button" onclick="register()">
+                Регистрация
+            </div>
+        {% endif %}
+    </div>
+    {% block content %}
+
+    {% endblock %}
+</main>
+
+<script type="text/javascript">
+    function profile() {
+        location.href = '/profile'
+    }
+
+    function home() {
+        location.href = '/'
+    }
+
+    function login() {
+        location.href = '{% url "users:login" goal="-" %}'
+    }
+
+    function register() {
+        location.href = '{% url "users:register" goal="-" %}'
+    }
+
+    AOS.init();
+</script>
+{% block extrajs %}
+{% endblock %}
+</body>
+</html>

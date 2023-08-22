@@ -1,0 +1,10 @@
+{% extends 'main/template.html' %}
+
+{% block title %}
+    Игра {{ game_id }}
+{% endblock %}
+
+{% block content %}
+    <h1> {{ this_game.title }}</h1>
+    <h3> {{ this_game.description }}</h3>
+{% endblock %}
