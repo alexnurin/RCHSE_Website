@@ -14,6 +14,8 @@ SECRET_KEY = 'django-insecure-v3b5z@y-0p@)2w&$9v+*isqtfi-sr2=7g3qap1+)mep=yqcn1h
 DEBUG = True
 
 ALLOWED_HOSTS = []
+AUTH_USER_MODEL = 'users.User'
+
 
 # Application definition
 
@@ -112,3 +114,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
