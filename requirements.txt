@@ -1,4 +1,4 @@
 django
 pillow
 django-resized
-django-crispy-forms-2.0
+crispy-bootstrap4
