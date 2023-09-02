@@ -1,15 +1,10 @@
 from django.shortcuts import render, redirect
-from .models import Users, Games
-from .forms import UsersForm, GamesForm
+from .models import Games
+from .forms import GamesForm
 
 
 def index(request):
     return render(request, 'main/main.html', {'title': 'Главная страница сайта'})
-
-
-def users(request):
-    users = Users.objects.order_by('-id')
-    return render(request, 'main/users.html', {'title': 'Пользователи', 'users': users})
 
 
 def games(request):
