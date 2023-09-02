@@ -1,21 +1,5 @@
-from .models import Users, Games
+from .models import Games
 from django.forms import ModelForm, TextInput, Textarea
-
-
-class UsersForm(ModelForm):
-    class Meta:
-        model = Users
-        fields = ['name', 'email']
-        widgets = {
-            'name': TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите имя',
-            }),
-            'email': Textarea(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите почту',
-            }),
-        }
 
 
 class GamesForm(ModelForm):

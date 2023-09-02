@@ -22,8 +22,8 @@ from apps.users import views as users_views
 
 urlpatterns = [
     path('', include('apps.main.urls')),
+    path('', include('apps.users.urls')),
     path('admin/', admin.site.urls),
-    path('register/', users_views.register, name='register'),
 ]
 
 if settings.DEBUG:
