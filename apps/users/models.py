@@ -9,11 +9,11 @@ class User(AbstractUser):
         max_length=255
     )
     first_name = models.CharField(
-        verbose_name='name',
+        verbose_name='Имя',
         max_length=100
     )
     last_name = models.CharField(
-        verbose_name='surname',
+        verbose_name='Фамилия',
         max_length=100
     )
     is_staff = models.BooleanField(
