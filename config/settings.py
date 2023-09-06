@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     # Apps
     'apps.main',
     'apps.users',
+    'apps.games',
 
     # Addons
     'crispy_forms',
