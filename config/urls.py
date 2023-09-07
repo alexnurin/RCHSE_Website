@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('apps.main.urls')),
     path('', include('apps.users.urls')),
     path('', include('apps.games.urls')),
+    path('', include('social_django.urls')),
     path('admin/', admin.site.urls),
 ]
 
