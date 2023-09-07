@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # Addons
     "crispy_forms",
     "crispy_bootstrap4",
+    "social_django",
 ]
 
 MIDDLEWARE = [
@@ -66,6 +67,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "social_django.context_processors.backends",
             ],
         },
     },
@@ -85,6 +87,13 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
+
+AUTHENTICATION_BACKENDS = (
+    "social_core.backends.vk.VKOAuth2",  # бекенд авторизации через ВКонтакте
+    "django.contrib.auth.backends.ModelBackend",  # бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
+)
+
+LOGIN_REDIRECT_URL = "/"
 
 AUTH_PASSWORD_VALIDATORS = [
     {

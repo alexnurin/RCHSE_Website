@@ -2,3 +2,4 @@ django
 pillow
 django-resized
 crispy-bootstrap4
+social-auth-app-django
