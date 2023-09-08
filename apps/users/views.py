@@ -22,3 +22,7 @@ def users(request):
     return render(
         request, "users/users.html", {"title": "Пользователи", "users": users}
     )
+
+
+def profile(request):
+    return render(request, "users/profile.html", {"title": "Пользователь"})
