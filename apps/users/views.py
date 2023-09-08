@@ -19,3 +19,6 @@ def register(request):
 def users(request):
     users = User.objects.order_by('-id')
     return render(request, 'users/users.html', {'title': 'Пользователи', 'users': users})
+
+def profile(request):
+    return render(request, 'users/profile.html', {'title': 'Пользователь'})
