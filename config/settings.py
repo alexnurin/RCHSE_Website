@@ -1,10 +1,10 @@
 from pathlib import Path
 import os
 from .secrets import (
-    SECRET_KEY,
     SOCIAL_AUTH_VK_OAUTH2_KEY,
     SOCIAL_AUTH_VK_OAUTH2_SECRET,
     VK_SERVICE_ACCESS_KEY,
+    SECRET_KEY,
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
