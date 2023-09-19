@@ -14,6 +14,15 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='games',
             name='image',
-            field=django_resized.forms.ResizedImageField(crop=None, force_format=None, keep_meta=True, quality=-1, scale=None, size=[300, 300], upload_to='img/'),
+            field=django_resized.forms.ResizedImageField(
+                crop=None,
+                force_format=None,
+                keep_meta=True,
+                quality=-1,
+                scale=None,
+                size=[
+                    300,
+                    300],
+                upload_to='img/'),
         ),
     ]
