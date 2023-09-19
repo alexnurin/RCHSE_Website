@@ -1,5 +1,11 @@
 from pathlib import Path
 import os
+from .secrets import (
+    SECRET_KEY,
+    SOCIAL_AUTH_VK_OAUTH2_KEY,
+    SOCIAL_AUTH_VK_OAUTH2_SECRET,
+    VK_SERVICE_ACCESS_KEY,
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,7 +14,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-v3b5z@y-0p@)2w&$9v+*isqtfi-sr2=7g3qap1+)mep=yqcn1h"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
