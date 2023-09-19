@@ -1,4 +1,5 @@
 {% load static %}
+{% load trans from i18n %}
 <!DOCTYPE html>
 <html>
 
@@ -38,6 +39,8 @@
                         <a class="nav-item nav-link " href="{% url 'create' %}">Создать игру</a>
                         <a class="nav-item nav-link " href="{% url 'users' %}">Пользователи</a>
                         <a class="nav-item nav-link " href="{% url 'register' %}">Регистрация</a>
+                        <a href="/login/vk-oauth2"><img src="media/img/----" class="avatar-3" data-toggle="tooltip" title="{% trans 'VK' %}"></a>
+
                     </div>
                     <!-- Правая часть навигационной панели -->
                     <div class="navbar-nav">
@@ -71,7 +74,7 @@
     </main>
     <!-- Футер закреплен внизу, независимо от количества постов на странице -->
     <footer class="text-center bg-dark">
-        <p><a href="{% url 'home' %}">© Клуб Python Bytes 2022</a></p>
+        <p><a href="{% url 'home' %}">© Ролевой клуб ВШЭ 2023</a></p>
     </footer>
 
     <!-- Дополнительные скрипты JavaScript -->
