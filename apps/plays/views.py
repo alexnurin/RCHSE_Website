@@ -4,7 +4,7 @@ from .forms import PlayForm
 
 
 def plays(request):
-    plays_list = Play.objects.order_by("id")
+    plays_list = Play.objects.order_by("year").reverse()
     return render(
         request, "plays/plays.html", {"title": "Все постановки", "plays": plays_list}
     )
