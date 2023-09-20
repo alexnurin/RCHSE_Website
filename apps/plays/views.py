@@ -4,7 +4,7 @@ from .forms import PlayForm
 
 
 def plays(request):
-    plays_list = Play.objects.order_by("id")
+    plays_list = Play.objects.order_by("year").reverse()
     return render(
         request, "plays/plays.html", {"title": "Все постановки", "plays": plays_list}
     )
@@ -31,7 +31,7 @@ def create_play(request):
 def play(request):
     play_id = request.GET.get("id")
 
-    this_play = play.objects.filter(id=play_id)
+    this_play = Play.objects.filter(id=play_id)
     if this_play:
         this_play = this_play[0]
     else:

@@ -4,7 +4,7 @@ from apps.games.models import Game
 
 class Play(models.Model):
     year = models.IntegerField()
-    game = models.OneToOneField(Game, models.CASCADE)
+    game = models.ForeignKey(Game, models.CASCADE)
 
     def __str__(self):
         return f"{self.game.title}: {self.year}"
