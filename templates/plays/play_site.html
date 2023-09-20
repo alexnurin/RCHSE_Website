@@ -5,9 +5,14 @@
 {% endblock %}
 
 {% block content %}
+{% if this_play %}
 <h1> {{ this_play.game.title }} {{ this_play.year }}</h1>
 <h3> {{ this_play.game.description }}</h3>
 <a href="{% url 'game' %}?id={{ this_play.game.id }}" class="nav-link"> Страница игры </a>
+<a href="{% url 'create_record' %}" class="nav-link"> Записаться </a>
 <img src="{{ MEDIA_ROOT }}{{ this_play.game.image.url }}">
 <!-- <h3> {{ this_game.description }}</h3> -->
+{% else %}
+<p>Постановка не найдена!</p>
+{% endif %}
 {% endblock %}
