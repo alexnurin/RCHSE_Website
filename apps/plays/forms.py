@@ -1,11 +1,11 @@
 from .models import Play
-from django.forms import ModelForm, IntegerField
+from django.forms import ModelForm, NumberInput, CharField
 
 
 class PlayForm(ModelForm):
     class Meta:
         model = Play
-        fields = ["year"]
+        fields = ["year", "game"]
         widgets = {
-            "year": IntegerField(),
+            "year": NumberInput(attrs={"class": "form-control"}),
         }

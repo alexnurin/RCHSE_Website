@@ -2,28 +2,25 @@
 {% load static %}
 {% get_media_prefix %}
 {% block title %}
-    {{ title }}
+{{ title }}
 {% endblock %}
 
 {% block content %}
-    <h1 style="text-align: center"> Игры </h1>
-    {% if games %}
-        <div class="navitems_plates" style="text-align: center">
-            {% for el in games %}
-                <div class="navitems_plate">
-                    <a href="{% url 'game' %}?id={{ el.id }}" class="nav-link">
-                        <div class="navitems_plate_more">
-                            <div class="navitems_plate_name"> {{ el.title }}</div>
-                        </div>
-                        <div class="navitems_plate_avatar"><img src="{{ MEDIA_ROOT }}{{ el.image.url }}"></div>
-                    </a>
-                </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <p>Игры отсутствуют!</p>
-    {% endif %}
+<h1 style="text-align: center"> Игры </h1>
+{% if games %}
+<div class="navitems_plates" style="text-align: center">
+    {% for el in games reversed %}
+    <div class="navitems_plate">
+        <a href="{% url 'game' %}?id={{ el.id }}" class="nav-link">
+            <div class="navitems_plate_more">
+                <div class="navitems_plate_name"> {{ el.title }}</div>
+            </div>
+            <div class="navitems_plate_avatar"><img src="{{ MEDIA_ROOT }}{{ el.image.url }}"></div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>Игры отсутствуют!</p>
+{% endif %}
 {% endblock %}
-
-
-

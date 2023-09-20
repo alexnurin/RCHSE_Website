@@ -1,10 +1,13 @@
 {% extends 'main/template.html' %}
 
 {% block title %}
-    Игра {{ game_id }}
+Постановка {{ this_play.game.title }} {{ this_play.year }}
 {% endblock %}
 
 {% block content %}
-    <h1> {{ this_game.title }}</h1>
-    <h3> {{ this_game.description }}</h3>
+<h1> {{ this_play.game.title }} {{ this_play.year }}</h1>
+<h3> {{ this_play.game.description }}</h3>
+<a href="{% url 'game' %}?id={{ this_play.game.id }}" class="nav-link"> Страница игры </a>
+<img src="{{ MEDIA_ROOT }}{{ this_play.game.image.url }}">
+<!-- <h3> {{ this_game.description }}</h3> -->
 {% endblock %}

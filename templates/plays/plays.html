@@ -13,9 +13,9 @@
     <div class="navitems_plate">
         <a href="{% url 'play' %}?id={{ el.id }}" class="nav-link">
             <div class="navitems_plate_more">
-                <div class="navitems_plate_name"> {{ el.title }}</div>
+                <div class="navitems_plate_name"> {{ el.game.title }} {{ el.year }}</div>
             </div>
-            <div class="navitems_plate_avatar"><img src="{{ MEDIA_ROOT }}{{ el.image.url }}"></div>
+            <div class="navitems_plate_avatar"><img src="{{ MEDIA_ROOT }}{{ el.game.image.url }}"></div>
         </a>
     </div>
     {% endfor %}
