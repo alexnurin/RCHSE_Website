@@ -1,0 +1,24 @@
+{% extends 'main/template.html' %}
+{% load static %}
+{% get_media_prefix %}
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<h1 style="text-align: center"> Записи </h1>
+{% if records %}
+<div class="navitems_plates" style="text-align: center">
+    {% for el in records %}
+    <div class="navitems_plate">
+        <div class="navitems_plate_more">
+            <div class="navitems_plate_name"> Запись {{ el.id }}: {{ el.name }} {{ el.surname }} на игру
+                {{ el.play.game.title }} {{ el.play.year }}</div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>Записи отсутствуют!</p>
+{% endif %}
+{% endblock %}

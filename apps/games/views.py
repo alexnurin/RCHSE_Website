@@ -35,7 +35,7 @@ def game(request):
     if this_game:
         this_game = this_game[0]
     else:
-        this_game = "empty"
+        return redirect("games")
 
     context = {"game_id": game_id, "this_game": this_game}
     return render(request, "games/game_site.html", context)
