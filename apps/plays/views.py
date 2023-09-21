@@ -59,7 +59,21 @@ def create_record(request):
             return redirect("records")
         else:
             error = "Форма была неверной"
-    form = RecordForm()
+            context = {
+                "form": form,
+                "error": error,
+            }
+            return render(request, "plays/create_record.html", context)
+
+    play_id = request.GET.get("play")
+    selectd_play = Play.objects.filter(id=play_id)
+    print(selectd_play)
+    if selectd_play:
+        selectd_play = selectd_play[0]
+        form = RecordForm(play=selectd_play)
+    else:
+        form = RecordForm()
+
     context = {
         "form": form,
         "error": error,

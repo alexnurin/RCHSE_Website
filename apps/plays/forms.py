@@ -1,4 +1,5 @@
 from .models import Play, Record
+
 from django.forms import (
     ModelForm,
     NumberInput,
@@ -18,6 +19,11 @@ class PlayForm(ModelForm):
 
 
 class RecordForm(ModelForm):
+    def __init__(self, play=None, *args, **kwargs):
+        super(RecordForm, self).__init__(*args, **kwargs)
+        if play:
+            self.fields["play"].initial = play
+
     class Meta:
         model = Record
         fields = [

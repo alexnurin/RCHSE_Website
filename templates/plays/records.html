@@ -8,16 +8,22 @@
 {% block content %}
 <h1 style="text-align: center"> Записи </h1>
 {% if records %}
-<div class="navitems_plates" style="text-align: center">
+<table class="styled-table">
+    <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Постановка</th>
+    </tr>
     {% for el in records %}
-    <div class="navitems_plate">
-        <div class="navitems_plate_more">
-            <div class="navitems_plate_name"> Запись {{ el.id }}: {{ el.name }} {{ el.surname }} на игру
-                {{ el.play.game.title }} {{ el.play.year }}</div>
-        </div>
-    </div>
+    <tr>
+        <td>{{ el.id }}</td>
+        <td>{{ el.name }}</td>
+        <td>{{ el.surname }}</td>
+        <td>{{ el.play.game.title }}{{ el.play.year }}</td>
+    </tr>
     {% endfor %}
-</div>
+</table>
 {% else %}
 <p>Записи отсутствуют!</p>
 {% endif %}
