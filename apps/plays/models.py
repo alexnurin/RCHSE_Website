@@ -19,7 +19,7 @@ class Record(models.Model):
     surname = models.CharField("Фамилия", max_length=50)
     need_pass = models.BooleanField("Нужен пропуск")
     patronymic = models.CharField("Отчество", max_length=50)
-    vk_link = models.URLField("Ссылка на ВК", unique=True)
+    vk_link = models.URLField("Ссылка на ВК")
     preferable_mates = models.TextField("Предпочтения по сессии")
     preferable_role = models.TextField("Предпочтения по роли")
     first_game = models.BooleanField("Это твоя первая игра?")

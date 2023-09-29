@@ -53,12 +53,13 @@ def records(request):
 def create_record(request):
     error = ""
     if request.method == "POST":
-        form = RecordForm(request.POST, request.FILES)
+        form = RecordForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             form.save()
             return redirect("records")
         else:
             error = "Форма была неверной"
+            print(f"ERRORS: <{form.errors}>")
             context = {
                 "form": form,
                 "error": error,
