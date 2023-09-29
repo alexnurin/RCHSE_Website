@@ -14,8 +14,8 @@
     <link
         href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900'
         rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="{% static 'style/main.css' %}">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/main.css' %}">
 
     <title>{% block title %}{% endblock %}</title>
 </head>
@@ -40,7 +40,7 @@
                     </div>
                     <!-- Правая часть навигационной панели -->
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link" href="{% url 'home' %}">Вход</a>
+                        <a class="nav-item nav-link" href="{% url 'login' %}">Вход</a>
                         <a class="nav-item nav-link" href="{% url 'register' %}">Регистрация</a>
                     </div>
                 </div>

@@ -5,6 +5,13 @@
 {% endblock %}
 
 {% block content %}
-<h1>Тут будет профиль.</h1>
+
+{% if user.is_authenticated %}
+<h1>Приветствуем, {{ user.username }}!</h1>
+<a href="{% url 'logout' %}">Выйти</a>
+<p>{{ user }}</p>
+{% else %}
+<h2>Ты не залогинен!</h2>
+{% endif %}
 
 {% endblock %}

@@ -1,11 +1,16 @@
 {% extends 'main/template.html' %}
 
 {% block title %}
-    О нас
+О нас
 {% endblock %}
 
 {% block content %}
-    <h1> Страница о нас </h1>
-    <h3> Список бесед:</h3>
-    to be continued
+<script type="text/javascript" src="https://vk.com/js/api/openapi.js?169"></script>
+
+<!-- VK Widget -->
+<div id="vk_article_-84029642_481472"></div>
+
+<script type="text/javascript">
+    VK.Widgets.Article("vk_article_-84029642_481472", "@rolehse-kak-k-nam-popast");
+</script>
 {% endblock %}
