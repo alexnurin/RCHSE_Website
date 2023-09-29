@@ -1,19 +1,23 @@
 {% extends 'main/template.html' %}
 
 {% block title %}
-    {{ title }}
+{{ title }}
 {% endblock %}
 
 {% block content %}
-    <h1> Пользователи: </h1>
-    {% if users %}
-        {% for el in users %}
-            <div class="alert alert-warning mt-2">
-                <h3> {{ el.name }}</h3>
-                <p> {{ el.email }}</p>
-            </div>
-        {% endfor %}
-    {% else %}
-        <p>У нас нет записей!</p>
-    {% endif %}
+<h1> Пользователи: </h1>
+{% if users %}
+<ul>
+    {% for el in users %}
+    <li>
+        <div class="alert alert-warning mt-2">
+            <h3> {{ el.username }}:</h3> <br>
+            <p> {{ el.first_name }} {{ el.last_name }}</p>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>У нас нет записей!</p>
+{% endif %}
 {% endblock %}
