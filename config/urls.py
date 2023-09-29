@@ -25,6 +25,7 @@ urlpatterns = [
     path("", include("apps.plays.urls")),
     path("", include("apps.games.urls")),
     path("", include("social_django.urls")),
+    # path("", include("django.contrib.auth.urls")),
     path("admin/", admin.site.urls),
 ]
 
