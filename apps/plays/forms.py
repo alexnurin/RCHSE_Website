@@ -19,10 +19,15 @@ class PlayForm(ModelForm):
 
 
 class RecordForm(ModelForm):
-    def __init__(self, play=None, *args, **kwargs):
+    def __init__(self, play=None, first_name=None, last_name=None, *args, **kwargs):
         super(RecordForm, self).__init__(*args, **kwargs)
+        print(play, first_name, last_name)
         if play:
             self.fields["play"].initial = play
+        if first_name:
+            self.fields["name"].initial = first_name
+        if last_name:
+            self.fields["surname"].initial = last_name
 
     class Meta:
         model = Record

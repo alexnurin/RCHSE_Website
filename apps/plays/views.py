@@ -70,9 +70,13 @@ def create_record(request):
     print(selectd_play)
     if selectd_play:
         selectd_play = selectd_play[0]
-        form = RecordForm(play=selectd_play)
-    else:
-        form = RecordForm()
+
+    first_name, last_name = None, None
+    if request.user.is_authenticated:
+        first_name = request.user.first_name
+        last_name = request.user.last_name
+    print(f"user is non/authorised as {first_name} {last_name}")
+    form = RecordForm(play=selectd_play, first_name=first_name, last_name=last_name)
 
     context = {
         "form": form,
