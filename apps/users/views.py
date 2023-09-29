@@ -52,3 +52,9 @@ def profile(request):
 def user_logout(request):
     dj_auth.logout(request)
     return redirect("home")
+
+
+def login_via_vk(request):
+    if request.user.is_authenticated:
+        dj_auth.logout(request)
+    return redirect("login/vk-oauth2")
