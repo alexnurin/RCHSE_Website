@@ -9,7 +9,7 @@
 {% if user.is_authenticated %}
 <h1>Приветствуем, {{ user.first_name }} {{ user.last_name }}!</h1>
 <a href="{% url 'logout' %}">Выйти</a>
-<p>{{ user }}</p>
+<p>login: {{ user }}</p>
 {% else %}
 <h2>Ты не залогинен!</h2>
 {% endif %}
