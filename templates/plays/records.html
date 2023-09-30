@@ -13,14 +13,21 @@
         <th>ID</th>
         <th>Имя</th>
         <th>Фамилия</th>
+        <th>ВК</th>
         <th>Постановка</th>
+        <th>Пожелания по сессии</th>
+        <th>Пожелания по роли</th>
+
     </tr>
     {% for el in records %}
     <tr>
         <td>{{ el.id }}</td>
         <td>{{ el.name }}</td>
         <td>{{ el.surname }}</td>
-        <td>{{ el.play.game.title }}{{ el.play.year }}</td>
+        <td><a href="{{ el.vk_link }}" class="nav-link">{{ el.vk_link }}</td>
+        <td>{{ el.play.game.title }} {{ el.play.year }}</td>
+        <td>{{ el.preferable_mates }}</td>
+        <td>{{ el.preferable_role }}</td>
     </tr>
     {% endfor %}
 </table>
