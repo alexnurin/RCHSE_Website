@@ -6,14 +6,14 @@
 
 {% block content %}
 
-{% if form.errors %}
+{% if errors_list %}
+{% for error in errors_list %}
+
 <div class="alert alert-danger" role="alert">
-    {% for field, errors in form.errors.items %}
-    {% for error in errors %}
-    <b>{{ field }}</b>: {{ error }}
-    {% endfor %}
-    {% endfor %}
+    {{ error }}
 </div>
+{% endfor %}
+
 {% endif %}
 
 <h1> Создать запись </h1>
@@ -22,7 +22,6 @@
     {{ form.as_p }}<br>
     <button type="submit" class="btn btn-success">Добавить</button>
     <br>
-    <span>{{ error }}</span>
 </form>
 
 {% endblock %}

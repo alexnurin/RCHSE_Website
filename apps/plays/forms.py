@@ -29,6 +29,14 @@ class RecordForm(ModelForm):
         if last_name:
             self.fields["surname"].initial = last_name
 
+    def check_duplicates(self):
+        duplicates = Record.objects.filter(
+            name=self.cleaned_data["name"],
+            surname=self.cleaned_data["surname"],
+            play=self.cleaned_data["play"],
+        )
+        return not duplicates
+
     class Meta:
         model = Record
         fields = [

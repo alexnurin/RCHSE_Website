@@ -54,16 +54,25 @@ def create_record(request):
     error = ""
     if request.method == "POST":
         form = RecordForm(data=request.POST, files=request.FILES)
-        if form.is_valid():
+        if form.is_valid() and form.check_duplicates():
             form.save()
             return redirect("records")
         else:
-            error = "Форма была неверной"
-            print(f"ERRORS: <{form.errors}>")
+            errors_list = []
+            for field, errors in form.errors.items():
+                for error in errors:
+                    errors_list.append(f"{field}: {error}")
+
+            if not form.check_duplicates():
+                errors_list.append(
+                    "Нельзя дважды регистрироваться на одну и ту же постановку!"
+                )
+
             context = {
                 "form": form,
-                "error": error,
+                "errors_list": errors_list,
             }
+            print(errors_list)
             return render(request, "plays/create_record.html", context)
 
     play_id = request.GET.get("play")
