@@ -13,13 +13,13 @@
 <h1 style="text-align: center"> Записи </h1>
 
 
-{% if records %}
-
 <form method="get" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_div }}
     <button type="submit" class="btn btn-success">Применить</button>
 </form>
+{% if records %}
+
 
 <table class="styled-table">
     <tr>

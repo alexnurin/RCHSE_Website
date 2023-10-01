@@ -18,7 +18,9 @@ def create_game(request):
             form.save()
             return redirect("games")
         else:
-            error = "Форма была неверной"
+            error = form.errors
+            print(form.errors)
+
     form = GameForm()
     context = {
         "form": form,

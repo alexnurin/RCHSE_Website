@@ -8,18 +8,35 @@
 {% block content %}
 <h1 style="text-align: center"> Игры </h1>
 {% if games %}
-<div class="navitems_plates" style="text-align: center">
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Изображение</th>
+        <th>Вместимость</th>
+    </tr>
+
     {% for el in games reversed %}
-    <div class="navitems_plate">
-        <a href="{% url 'game' %}?id={{ el.id }}" class="nav-link">
-            <div class="navitems_plate_more">
-                <div class="navitems_plate_name"> {{ el.title }}</div>
-            </div>
+    <tr>
+        <div class="navitems_plate_more">
+            <td>
+                <h1>
+                    <a href="{% url 'game' %}?id={{ el.id }}" class="nav-link">
+                        <div class="navitems_plate_name"> {{ el.title }}</div>
+                    </a>
+                </h1>
+            </td>
+
+        </div>
+        <td>
             <div class="navitems_plate_avatar"><img src="{{ MEDIA_ROOT }}{{ el.image.url }}"></div>
-        </a>
-    </div>
+        </td>
+        <td>
+            {{el.capacity}}
+        </td>
+    </tr>
     {% endfor %}
-</div>
+    </div>
+</table>
 {% else %}
 <p>Игры отсутствуют!</p>
 {% endif %}

@@ -44,7 +44,6 @@ def play(request):
 def records(request):
     form = FilterRecordsForm(request.GET, request.FILES)
     play_id = request.GET.get("play")
-    # form.fields["play"].choices = [(play_id, play_id)]
 
     if play_id:
         this_play = Play.objects.filter(id=play_id)[0]

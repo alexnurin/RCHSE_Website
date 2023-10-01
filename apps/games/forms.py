@@ -5,7 +5,7 @@ from django.forms import ModelForm, TextInput, Textarea
 class GameForm(ModelForm):
     class Meta:
         model = Game
-        fields = ["title", "description", "image"]
+        fields = ["title", "description", "capacity", "image"]
         widgets = {
             "title": TextInput(
                 attrs={
