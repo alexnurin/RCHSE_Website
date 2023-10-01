@@ -1,11 +1,14 @@
 from .models import Play, Record
 
 from django.forms import (
+    Form,
     ModelForm,
     NumberInput,
     TextInput,
     RadioSelect,
     Textarea,
+    ModelChoiceField,
+    Select,
 )
 
 
@@ -16,6 +19,16 @@ class PlayForm(ModelForm):
         widgets = {
             "year": NumberInput(attrs={"class": "form-control"}),
         }
+
+
+class FilterRecordsForm(Form):
+    play = ModelChoiceField(
+        label="Постановка",
+        queryset=Play.objects.order_by("year").reverse()[:5],
+        widget=Select(),
+        required=False,
+        empty_label="все постановки",
+    )
 
 
 class RecordForm(ModelForm):

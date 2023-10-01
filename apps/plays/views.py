@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Play, Record
-from .forms import PlayForm, RecordForm
+from .forms import PlayForm, RecordForm, FilterRecordsForm
 
 
 def plays(request):
@@ -42,11 +42,24 @@ def play(request):
 
 
 def records(request):
-    records_list = Record.objects.order_by("id").reverse()
+    form = FilterRecordsForm(request.GET, request.FILES)
+    play_id = request.GET.get("play")
+    # form.fields["play"].choices = [(play_id, play_id)]
+
+    if play_id:
+        this_play = Play.objects.filter(id=play_id)[0]
+        records_list = Record.objects.filter(play=this_play).order_by("id").reverse()
+    else:
+        records_list = Record.objects.order_by("id").reverse()
+
     return render(
         request,
         "plays/records.html",
-        {"title": "Все записи", "records": records_list},
+        {
+            "title": "Все записи",
+            "records": records_list,
+            "form": form,
+        },
     )
 
 

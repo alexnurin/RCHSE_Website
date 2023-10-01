@@ -1,31 +1,44 @@
 {% extends 'main/template.html' %}
 {% load static %}
+
 {% get_media_prefix %}
 {% block title %}
 {{ title }}
 {% endblock %}
 
+
 {% block content %}
+
+
 <h1 style="text-align: center"> Записи </h1>
+
+
 {% if records %}
+
+<form method="get" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_div }}
+    <button type="submit" class="btn btn-success">Применить</button>
+</form>
+
 <table class="styled-table">
     <tr>
+        <th>Постановка</th>
         <th>ID</th>
         <th>Имя</th>
         <th>Фамилия</th>
         <th>ВК</th>
-        <th>Постановка</th>
         <th>Пожелания по сессии</th>
         <th>Пожелания по роли</th>
 
     </tr>
     {% for el in records %}
     <tr>
+        <td>{{ el.play.game.title }} {{ el.play.year }}</td>
         <td>{{ el.id }}</td>
         <td>{{ el.name }}</td>
         <td>{{ el.surname }}</td>
         <td><a href="{{ el.vk_link }}" class="nav-link">{{ el.vk_link }}</td>
-        <td>{{ el.play.game.title }} {{ el.play.year }}</td>
         <td>{{ el.preferable_mates }}</td>
         <td>{{ el.preferable_role }}</td>
     </tr>
