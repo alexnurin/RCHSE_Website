@@ -5,4 +5,5 @@ urlpatterns = [
     path("games", views.games, name="games"),
     path("game", views.game, name="game"),
     path("create_game", views.create_game, name="create_game"),
+    path("delete_game", views.delete_game, name="delete_game"),
 ]

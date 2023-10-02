@@ -5,9 +5,18 @@ from apps.plays.models import Play
 
 
 def games(request):
-    games_list = Game.objects.order_by("id")
+    games = Game.objects.order_by("id")
+    plays_list = {}
+    for game in games:
+        plays_list[game] = Play.objects.filter(game=game).order_by("year").reverse()[:5]
     return render(
-        request, "games/games.html", {"title": "Все игры", "games": games_list}
+        request,
+        "games/games.html",
+        {
+            "title": "Все игры",
+            "games": games,
+            "plays_list": plays_list,
+        },
     )
 
 
@@ -29,6 +38,14 @@ def create_game(request):
     }
 
     return render(request, "games/create_game.html", context)
+
+
+def delete_game(request):
+    game_id = request.GET.get("game_id")
+    game = Game.objects.filter(id=game_id)
+    if game:
+        game[0].delete()
+    return redirect("games")
 
 
 def game(request):

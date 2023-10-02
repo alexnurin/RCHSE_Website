@@ -5,9 +5,14 @@
 {% endblock %}
 
 {% block content %}
-<h1> {{ this_game.title }}</h1>
-<h3> {{ this_game.description }}</h3>
-<img src="{{ MEDIA_ROOT }}{{ this_game.image.url }}">
+<h1> Название: {{ this_game.title }}</h1>
+<h3> Описание: {{ this_game.description }}</h3>
+<img src="{{ MEDIA_ROOT }}{{ this_game.image.url }}"><br><br>
+
+<a href="{% url 'delete_game'%}?game_id={{this_game.id}}" class="btn btn-danger">
+    <b class="bi bi-x-circle">Удалить игру</b>
+</a><br><br>
+
 {% if plays %}
 <h4>Постановки:</h4>
 {% for play in plays %}
