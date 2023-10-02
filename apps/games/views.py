@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Game
 from .forms import GameForm
+from apps.plays.models import Play
 
 
 def games(request):
@@ -39,5 +40,11 @@ def game(request):
     else:
         return redirect("games")
 
-    context = {"game_id": game_id, "this_game": this_game}
+    plays = Play.objects.filter(game=this_game).order_by("year").reverse()[:5]
+
+    context = {
+        "game_id": game_id,
+        "this_game": this_game,
+        "plays": plays,
+    }
     return render(request, "games/game_site.html", context)

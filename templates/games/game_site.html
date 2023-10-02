@@ -8,4 +8,15 @@
 <h1> {{ this_game.title }}</h1>
 <h3> {{ this_game.description }}</h3>
 <img src="{{ MEDIA_ROOT }}{{ this_game.image.url }}">
+{% if plays %}
+<h4>Постановки:</h4>
+{% for play in plays %}
+<a href="{% url 'play' %}?id={{ play.id }}" class="nav-link">
+    <li class="navitems_plate_more">{{ play }}
+    </li>
+</a>
+{% endfor %}
+{% else %}
+<p>По этой игре ещё нет постановок!</p>
+{% endif %}
 {% endblock %}
