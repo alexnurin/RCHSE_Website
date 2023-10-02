@@ -1,6 +1,6 @@
 # Курсовая работа: сайт для Ролевого Клуба ВШЭ <br>
 
-<img width="1315" alt="image" src="https://github.com/alexnurin/RCHSE_Website/assets/44980361/b011257c-b196-4120-a8bb-e954c76872de">
+<img width="1320" alt="image" src="https://github.com/alexnurin/RCHSE_Website/assets/44980361/cea6b9ff-8b7a-4eb1-b745-5732e241f0f3">
 
 ## Инструкция по развёртыванию сервера:
 1. Установить репозиторий с помощью ```git clone https://github.com/alexnurin/RCHSE_Website```
