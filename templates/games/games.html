@@ -10,28 +10,25 @@
 {% if games %}
 <table>
     <tr>
-        <th>Название</th>
-        <th>Изображение</th>
-        <th>Вместимость</th>
+        <th>Игра</th>
+        <th>Сессии</th>
     </tr>
 
     {% for el in games reversed %}
     <tr>
         <div class="navitems_plate_more">
             <td>
-                <h1>
+                <h3>
                     <a href="{% url 'game' %}?id={{ el.id }}" class="nav-link">
-                        <div class="navitems_plate_name"> {{ el.title }}</div>
+                        <div class="navitems_plate_name"> {{ el.title }}, игроков: {{el.capacity}}</div>
+                        <div class="navitems_plate_avatar"><img src="{{ MEDIA_ROOT }}{{ el.image.url }}"></div>
                     </a>
-                </h1>
+                </h3>
             </td>
-
         </div>
+
         <td>
-            <div class="navitems_plate_avatar"><img src="{{ MEDIA_ROOT }}{{ el.image.url }}"></div>
-        </td>
-        <td>
-            {{el.capacity}}
+            тут будут сессии
         </td>
     </tr>
     {% endfor %}
