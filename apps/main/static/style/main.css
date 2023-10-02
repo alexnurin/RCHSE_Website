@@ -22,7 +22,7 @@ ul {
 }
 
 .bg-blue {
-  background-color: #6699cc;
+  background-color: #1d436a;
 }
 
 .site-header .navbar-nav .nav-link {
@@ -125,4 +125,8 @@ td {
 tr {
   text-align: center;
   font-size: small;
+}
+
+a {
+  color: #1d436a;
 }
