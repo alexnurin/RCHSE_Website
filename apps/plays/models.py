@@ -15,6 +15,7 @@ class Play(models.Model):
 
 
 class Record(models.Model):
+    play = models.ForeignKey(Play, models.CASCADE)
     name = models.CharField("Имя", max_length=50)
     surname = models.CharField("Фамилия", max_length=50)
     need_pass = models.BooleanField("Нужен пропуск")
@@ -23,7 +24,6 @@ class Record(models.Model):
     preferable_mates = models.TextField("Предпочтения по сессии")
     preferable_role = models.TextField("Предпочтения по роли")
     first_game = models.BooleanField("Это твоя первая игра?")
-    play = models.ForeignKey(Play, models.CASCADE)
 
     def __str__(self):
         return f"{self.name} {self.surname}, {self.play}"
