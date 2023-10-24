@@ -34,7 +34,6 @@
                     <!-- Основная часть навигационной панели -->
                     <div class="navbar-nav mr-auto">
                         <a class="nav-item nav-link " href="{% url 'users' %}">Пользователи</a>
-                        <a class="nav-item nav-link " href="{% url 'register' %}">Регистрация</a>
                         <a class="nav-item nav-link " href="{% url 'login_via_vk' %}">Через ВК</a>
                         <a class="nav-item nav-link " href="{% url 'profile' %}">Профиль</a>
                     </div>
@@ -56,24 +55,27 @@
                 <div class="content-section">
                     <h3>Разделы</h3>
                     <ul class="list-group">
-                        <a class="list-group-item list-group-item-light" href="{% url 'home' %}">Главная</a>
-                        <a class="list-group-item list-group-item-light" href="{% url 'games' %}">Архив игр</a>
+                        <a class="list-group-item list-group-item-light" href="{% url 'home' %}">Главная
+                        </a>
+                        <a class="list-group-item list-group-item-light" href="{% url 'games' %}">Архив игр
+                        </a>
                         <a class="list-group-item list-group-item-light" href="{% url 'create_game' %}">Создать игру</a>
-                        <a class="list-group-item list-group-item-light" href="{% url 'plays' %}">Постановки</a>
+                        <a class="list-group-item list-group-item-light" href="{% url 'plays' %}">Постановки игр</a>
                         <a class="list-group-item list-group-item-light" href="{% url 'create_play' %}">Создать
                             постановку</a>
-                        <a class="list-group-item list-group-item-light" href="{% url 'records' %}">Все записи</a>
-                        <a class="list-group-item list-group-item-light" href="{% url 'create_record' %}">Создать
-                            запись</a>
+                        <a class="list-group-item list-group-item-light" href="{% url 'records' %}">Таблица записей</a>
+                        <a class="list-group-item list-group-item-light" href="{% url 'create_record' %}">Записаться</a>
                         <a class="list-group-item list-group-item-light" href="{% url 'about' %}">О нас</a>
                         <a class="list-group-item list-group-item-light" href="https://vk.com/rolehse">Группа
                             ВК</a>
+                        <a class="list-group-item list-group-item-primary" href="{% url 'create_record' %}">Записаться
+                            на
+                            ближайшую игру</a>
                     </ul>
                     </p>
                 </div>
             </div>
         </div>
-
     </main>
     <!-- Футер закреплен внизу, независимо от количества постов на странице -->
     <footer class="text-center bg-dark">

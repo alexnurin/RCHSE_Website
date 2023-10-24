@@ -42,7 +42,7 @@ def play(request):
 
 
 def records(request):
-    form = FilterRecordsForm(request.GET, request.FILES)
+    form = FilterRecordsForm()
     play_id = request.GET.get("play")
 
     if play_id:
@@ -50,6 +50,10 @@ def records(request):
         records_list = Record.objects.filter(play=this_play).order_by("id").reverse()
     else:
         records_list = Record.objects.order_by("id").reverse()
+
+    if not form.is_valid():
+        for f in form:
+            print("ERROR: ", f.field, f.errors)
 
     return render(
         request,
@@ -88,10 +92,10 @@ def create_record(request):
             return render(request, "plays/create_record.html", context)
 
     play_id = request.GET.get("play")
-    selectd_play = Play.objects.filter(id=play_id)
-    print(selectd_play)
-    if selectd_play:
-        selectd_play = selectd_play[0]
+    if not play_id:
+        selectd_play = Play.objects.latest("id")
+    else:
+        selectd_play = Play.objects.filter(id=play_id)[0]
 
     first_name, last_name = None, None
     if request.user.is_authenticated:

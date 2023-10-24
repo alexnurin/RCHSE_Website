@@ -130,3 +130,16 @@ tr {
 a {
   color: #1d436a;
 }
+
+
+.list-group-item-light {
+  color: inherit;
+}
+
+
+.plus {
+  font-size: 24px;
+  color: red;
+  position: relative;
+  display: inline-block;
+}

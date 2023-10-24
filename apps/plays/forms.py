@@ -23,13 +23,12 @@ class PlayForm(ModelForm):
 
 class FilterRecordsForm(Form):
     play = ModelChoiceField(
-        label="Постановка",
-        queryset=Play.objects.order_by("year").reverse()[:5],
-        widget=Select(),
-        required=False,
-        empty_label="все постановки",
+            label="Постановка",
+            queryset=Play.objects.order_by("year").reverse()[:5],
+            widget=Select(),
+            required=False,
+            empty_label="все постановки",
     )
-
 
 class RecordForm(ModelForm):
     def __init__(self, play=None, first_name=None, last_name=None, *args, **kwargs):
