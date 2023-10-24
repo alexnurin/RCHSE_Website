@@ -1,13 +1,19 @@
 from django.db import models
+from datetime import time
 from apps.games.models import Game
 
 
 class Play(models.Model):
-    year = models.IntegerField()
+    year = models.PositiveIntegerField(default=2020)
+    month = models.PositiveIntegerField(default=9)
+    day = models.PositiveIntegerField(default=1)
+    time = models.TimeField(default=time(16, 00))
     game = models.ForeignKey(Game, models.CASCADE)
 
     def __str__(self):
-        return f"{self.game.title}: {self.year}"
+        if self.time is None:
+            self.time = time(16, 1)
+        return f"{self.game.title}: {self.year:04}, {self.day:02}.{self.month:02}, старт в {self.time}"
 
     class Meta:
         verbose_name = "Постановка"

@@ -8,7 +8,7 @@ def games(request):
     games = Game.objects.order_by("id")
     plays_list = {}
     for game in games:
-        plays_list[game] = Play.objects.filter(game=game).order_by("year").reverse()[:5]
+        plays_list[game] = Play.objects.filter(game=game).order_by("time").reverse()[:5]
     return render(
         request,
         "games/games.html",
