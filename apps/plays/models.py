@@ -1,19 +1,16 @@
 from django.db import models
-from datetime import time
+from datetime import datetime
 from apps.games.models import Game
 
 
 class Play(models.Model):
-    year = models.PositiveIntegerField(default=2020)
-    month = models.PositiveIntegerField(default=9)
-    day = models.PositiveIntegerField(default=1)
-    time = models.TimeField(default=time(16, 00))
-    game = models.ForeignKey(Game, models.CASCADE)
+    play_id = models.AutoField(primary_key=True)
+    date = models.DateTimeField(default=datetime(year=2020, month=9, day=1, hour=16))
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    sessions_number = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        if self.time is None:
-            self.time = time(16, 1)
-        return f"{self.game.title}: {self.year:04}, {self.day:02}.{self.month:02}, старт в {self.time}"
+        return f"Постановка #{self.id}: {self.game.name} on {self.date}"
 
     class Meta:
         verbose_name = "Постановка"
@@ -24,8 +21,8 @@ class Record(models.Model):
     play = models.ForeignKey(Play, models.CASCADE)
     name = models.CharField("Имя", max_length=50)
     surname = models.CharField("Фамилия", max_length=50)
-    need_pass = models.BooleanField("Нужен пропуск")
-    patronymic = models.CharField("Отчество", max_length=50)
+    need_pass = models.BooleanField("Нужен пропуск", default=False)
+    patronymic = models.CharField("Отчество", max_length=50, blank=True)
     vk_link = models.URLField("Ссылка на ВК")
     preferable_mates = models.TextField("Предпочтения по сессии")
     preferable_role = models.TextField("Предпочтения по роли")

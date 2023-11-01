@@ -16,26 +16,13 @@ from django.forms import (
 class PlayForm(ModelForm):
     class Meta:
         model = Play
-        fields = ["game", "year", "month", "day", "time"]
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields["time"].widget = TimeInput(format="%H:%M", attrs={"type": "time"})
-        self.fields["year"].widget = NumberInput(
-            attrs={"type": "number", "min": "1900", "max": "2100"}
-        )
-        self.fields["month"].widget = NumberInput(
-            attrs={"type": "number", "min": "1", "max": "12"}
-        )
-        self.fields["day"].widget = NumberInput(
-            attrs={"type": "number", "min": "1", "max": "31"}
-        )
+        fields = ["game", "date"]
 
 
 class FilterRecordsForm(Form):
     play = ModelChoiceField(
         label="Постановка",
-        queryset=Play.objects.order_by("time").reverse()[:5],
+        queryset=Play.objects.order_by("date").reverse()[:5],
         widget=Select(),
         required=False,
         empty_label="все постановки",
