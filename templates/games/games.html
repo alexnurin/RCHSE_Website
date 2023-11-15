@@ -24,7 +24,7 @@
         <div class="navitems_plate_more">
             <td>
                 <h3>
-                    <a href="{% url 'game' %}?id={{ el.id }}" class="nav-link">
+                    <a href="{% url 'game' %}?game_id={{ el.game_id }}" class="nav-link">
                         <div class="navitems_plate_name"> {{ el.title }}, игроков: {{el.capacity}}</div>
                         <div class="navitems_plate_avatar"><img src="{{ MEDIA_ROOT }}{{ el.image.url }}"></div>
                     </a>
@@ -38,7 +38,7 @@
             {% if game == el %}
             <h6>Постановки:</h6>
             {% for play in plays_for_the_game %}
-            <a href="{% url 'play' %}?id={{ play.id }}" class="nav-link">
+            <a href="{% url 'play' %}?play_id={{ play.play_id }}" class="nav-link">
                 <div class="navitems_plate_name"> {{ play }}</div>
             </a>
             {% endfor %}

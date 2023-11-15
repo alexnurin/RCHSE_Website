@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from datetime import time
 from apps.games.models import Game
 
 
@@ -10,7 +11,7 @@ class Play(models.Model):
     sessions_number = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return f"Постановка #{self.id}: {self.game.name} on {self.date}"
+        return f"Постановка: {self.game.title} {self.date}"
 
     class Meta:
         verbose_name = "Постановка"
@@ -18,6 +19,7 @@ class Play(models.Model):
 
 
 class Record(models.Model):
+    record_id = models.AutoField(primary_key=True)
     play = models.ForeignKey(Play, models.CASCADE)
     name = models.CharField("Имя", max_length=50)
     surname = models.CharField("Фамилия", max_length=50)

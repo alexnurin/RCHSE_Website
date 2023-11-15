@@ -5,10 +5,10 @@ from apps.plays.models import Play
 
 
 def games(request):
-    games = Game.objects.order_by("id")
+    games = Game.objects.order_by("game_id")
     plays_list = {}
     for game in games:
-        plays_list[game] = Play.objects.filter(game=game).order_by("time").reverse()[:5]
+        plays_list[game] = Play.objects.filter(game=game).order_by("date").reverse()[:5]
     return render(
         request,
         "games/games.html",
@@ -49,15 +49,15 @@ def delete_game(request):
 
 
 def game(request):
-    game_id = request.GET.get("id")
+    game_id = request.GET.get("game_id")
 
-    this_game = Game.objects.filter(id=game_id)
+    this_game = Game.objects.filter(game_id=game_id)
     if this_game:
         this_game = this_game[0]
     else:
         return redirect("games")
 
-    plays = Play.objects.filter(game=this_game).order_by("year").reverse()[:5]
+    plays = Play.objects.filter(game=this_game).order_by("date").reverse()[:5]
 
     context = {
         "game_id": game_id,

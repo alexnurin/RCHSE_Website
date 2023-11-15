@@ -4,6 +4,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class Game(models.Model):
+    game_id = models.AutoField(primary_key=True)
     title = models.CharField("Название", max_length=50, unique=True)
     description = models.TextField("Описание")
     capacity = models.IntegerField(

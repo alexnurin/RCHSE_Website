@@ -8,6 +8,7 @@ class User(AbstractUser):
     first_name = models.CharField(verbose_name="Name", max_length=100)
     last_name = models.CharField(verbose_name="Surname", max_length=100)
     is_staff = models.BooleanField(verbose_name="Admin", default=False)
+    avatar = models.ImageField(upload_to='avatars/', blank=True)
 
     class Meta:
         verbose_name = "user"
