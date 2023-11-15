@@ -24,7 +24,6 @@
 <table class="styled-table">
     <tr>
         <th>Постановка</th>
-        <th>ID</th>
         <th>Имя</th>
         <th>Фамилия</th>
         <th>ВК</th>
@@ -35,7 +34,6 @@
     {% for el in records %}
     <tr>
         <td>{{ el.play.game.title }} {{ el.play.year }}</td>
-        <td>{{ el.id }}</td>
         <td>{{ el.name }}</td>
         <td>{{ el.surname }}</td>
         <td><a href="{{ el.vk_link }}" class="nav-link">{{ el.vk_link }}</td>

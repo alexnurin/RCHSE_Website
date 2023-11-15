@@ -4,7 +4,7 @@ from .forms import PlayForm, RecordForm, FilterRecordsForm
 
 
 def plays(request):
-    plays_list = Play.objects.order_by("time").reverse()
+    plays_list = Play.objects.order_by("play_id").reverse()
     return render(
         request, "plays/plays.html", {"title": "Все постановки", "plays": plays_list}
     )
@@ -29,9 +29,9 @@ def create_play(request):
 
 
 def play(request):
-    play_id = request.GET.get("id")
+    play_id = request.GET.get("play_id")
 
-    this_play = Play.objects.filter(id=play_id)
+    this_play = Play.objects.filter(play_id=play_id)
     if this_play:
         this_play = this_play[0]
     else:
@@ -43,13 +43,13 @@ def play(request):
 
 def records(request):
     form = FilterRecordsForm()
-    play_id = request.GET.get("play")
+    play_id = request.GET.get("play_id")
 
     if play_id:
-        this_play = Play.objects.filter(id=play_id)[0]
-        records_list = Record.objects.filter(play=this_play).order_by("id").reverse()
+        this_play = Play.objects.filter(play_id=play_id)[0]
+        records_list = Record.objects.filter(play=this_play).order_by("record_id").reverse()
     else:
-        records_list = Record.objects.order_by("id").reverse()
+        records_list = Record.objects.order_by("record_id").reverse()
 
     if not form.is_valid():
         for f in form:
@@ -73,30 +73,30 @@ def create_record(request):
         if form.is_valid() and form.check_duplicates():
             form.save()
             return redirect("records")
+        errors_list = []
+        for field, errors in form.errors.items():
+            for error in errors:
+                errors_list.append(f"{field}: {error}")
+
+        if not form.check_duplicates():
+            errors_list.append(
+                "Нельзя дважды регистрироваться на одну и ту же постановку!"
+            )
+
+        context = {
+            "form": form,
+            "errors_list": errors_list,
+        }
+        print(errors_list)
+        return render(request, "plays/create_record.html", context)
+    if Play.objects.exists():
+        play_id = request.GET.get("play_id")
+        if play_id:
+            selectd_play = Play.objects.filter(play_id=play_id)[0]
         else:
-            errors_list = []
-            for field, errors in form.errors.items():
-                for error in errors:
-                    errors_list.append(f"{field}: {error}")
-
-            if not form.check_duplicates():
-                errors_list.append(
-                    "Нельзя дважды регистрироваться на одну и ту же постановку!"
-                )
-
-            context = {
-                "form": form,
-                "errors_list": errors_list,
-            }
-            print(errors_list)
-            return render(request, "plays/create_record.html", context)
-
-    play_id = request.GET.get("play")
-    if not play_id:
-        selectd_play = Play.objects.latest("id")
+            selectd_play = Play.objects.latest("date")
     else:
-        selectd_play = Play.objects.filter(id=play_id)[0]
-
+        selectd_play = None
     first_name, last_name = None, None
     if request.user.is_authenticated:
         first_name = request.user.first_name

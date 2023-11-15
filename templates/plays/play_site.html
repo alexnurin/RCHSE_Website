@@ -1,15 +1,15 @@
 {% extends 'main/template.html' %}
 
 {% block title %}
-Постановка {{ this_play.game.title }} {{ this_play.year }}
+Постановка {{ this_play.game.title }}
 {% endblock %}
 
 {% block content %}
 {% if this_play %}
 <h1> {{ this_play.game.title }} {{ this_play.year }}</h1>
 <h3> {{ this_play.game.description }}</h3>
-<a href="{% url 'game' %}?id={{ this_play.game.id }}" class="nav-link"> Страница игры </a>
-<a href="{% url 'create_record' %}?play={{ this_play.id }}" class="nav-link"> Записаться </a>
+<a href="{% url 'game' %}?game_id={{ this_play.game.game_id }}" class="nav-link"> Страница игры </a>
+<a href="{% url 'create_record' %}?play_id={{ this_play.play_id }}" class="nav-link"> Записаться </a>
 <img src="{{ MEDIA_ROOT }}{{ this_play.game.image.url }}">
 <!-- <h3> {{ this_game.description }}</h3> -->
 {% else %}
