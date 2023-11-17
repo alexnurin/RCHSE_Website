@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    email = models.EmailField(verbose_name="Email", max_length=255)
+    email = models.EmailField(verbose_name="Email", max_length=255, blank=True)
     username = models.CharField(verbose_name="Username", max_length=100, unique=True)
     first_name = models.CharField(verbose_name="Name", max_length=100)
     last_name = models.CharField(verbose_name="Surname", max_length=100)
