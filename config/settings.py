@@ -20,7 +20,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 AUTH_USER_MODEL = "users.User"
-
+LOGIN_URL = 'two_factor:login'
 
 # Application definition
 
@@ -31,12 +31,18 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # Apps
+    # Two factor
+    'django_otp',
+    'django_otp.plugins.otp_totp',
+    'two_factor',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_email',
+    # My Apps
     "apps.main",
     "apps.users",
     "apps.plays",
     "apps.games",
-    # Addons
+    # Other addons
     "crispy_forms",
     "crispy_bootstrap4",
     "social_django",
@@ -50,6 +56,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'django_otp.middleware.OTPMiddleware',
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -90,7 +97,8 @@ DATABASES = {
 
 AUTHENTICATION_BACKENDS = (
     "social_core.backends.vk.VKOAuth2",  # бекенд авторизации через ВКонтакте
-    "django.contrib.auth.backends.ModelBackend",  # бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
+    "django.contrib.auth.backends.ModelBackend",
+    # бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
 )
 
 LOGIN_REDIRECT_URL = "/"

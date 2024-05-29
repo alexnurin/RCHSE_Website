@@ -3,3 +3,6 @@ pillow
 django-resized
 crispy-bootstrap4
 social-auth-app-django
+phonenumbers
+django-otp
+django-two-factor-auth
