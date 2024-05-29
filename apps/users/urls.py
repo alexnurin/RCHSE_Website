@@ -8,4 +8,5 @@ urlpatterns = [
     path("login_via_vk", views.login_via_vk, name="login_via_vk"),
     path("logout", views.user_logout, name="logout"),
     path("profile", views.profile, name="profile"),
+    path("assign_moderator/<int:user_id>/", views.assign_moderator, name='assign_moderator'),
 ]

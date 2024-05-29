@@ -1,7 +1,8 @@
+from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render, redirect
-from django.contrib import messages
 from .forms import NewUserForm, LoginUserForm
 from .models import User
+from django.contrib.auth.models import Group
 import django.contrib.auth as dj_auth
 
 
@@ -36,9 +37,9 @@ def login(request):
 
 
 def users(request):
-    users = User.objects.order_by("-last_login")
+    all_users = User.objects.order_by("-last_login")
     return render(
-        request, "users/users.html", {"title": "Пользователи", "users": users}
+        request, "users/users.html", {"title": "Пользователи", "users": all_users}
     )
 
 
@@ -58,3 +59,13 @@ def login_via_vk(request):
     if request.user.is_authenticated:
         dj_auth.logout(request)
     return redirect("login/vk-oauth2")
+
+
+@user_passes_test(lambda u: u.is_staff)  # Только администраторы могут назначать модераторов
+def assign_moderator(request, user_id):
+    user = User.objects.get(id=user_id)
+    user.is_admin = True
+    user.save()
+    moderator_group = Group.objects.get(name='Moderators')
+    user.groups.add(moderator_group)
+    return redirect('users')
