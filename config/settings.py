@@ -1,11 +1,11 @@
 from pathlib import Path
 import os
-from .secrets import (
-    SECRET_KEY,
-    SOCIAL_AUTH_VK_OAUTH2_KEY,
-    SOCIAL_AUTH_VK_OAUTH2_SECRET,
-    VK_SERVICE_ACCESS_KEY,
-)
+from decouple import config
+
+SECRET_KEY = config('SECRET_KEY')
+SOCIAL_AUTH_VK_OAUTH2_KEY = config('SOCIAL_AUTH_VK_OAUTH2_KEY')
+SOCIAL_AUTH_VK_OAUTH2_SECRET = config('SOCIAL_AUTH_VK_OAUTH2_SECRET')
+VK_SERVICE_ACCESS_KEY = config('VK_SERVICE_ACCESS_KEY')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

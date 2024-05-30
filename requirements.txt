@@ -1,4 +1,4 @@
-django
+django~=4.2
 pillow
 django-resized
 crispy-bootstrap4
@@ -6,3 +6,4 @@ social-auth-app-django
 phonenumbers
 django-otp
 django-two-factor-auth
+python-decouple
