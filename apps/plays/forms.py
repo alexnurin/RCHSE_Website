@@ -3,13 +3,11 @@ from .models import Play, Record
 from django.forms import (
     Form,
     ModelForm,
-    NumberInput,
     TextInput,
     RadioSelect,
     Textarea,
     ModelChoiceField,
     Select,
-    TimeInput,
 )
 
 
@@ -22,10 +20,9 @@ class PlayForm(ModelForm):
 class FilterRecordsForm(Form):
     play = ModelChoiceField(
         label="Постановка",
-        queryset=Play.objects.order_by("date").reverse()[:5],
-        widget=Select(),
+        queryset=Play.objects.all().order_by("date").reverse(),
         required=False,
-        empty_label="все постановки",
+        empty_label="Все постановки",
     )
 
 

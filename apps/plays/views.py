@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Play, Record
 from .forms import PlayForm, RecordForm, FilterRecordsForm
 
@@ -11,102 +11,62 @@ def plays(request):
 
 
 def create_play(request):
-    error = ""
     if request.method == "POST":
         form = PlayForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect("plays")
-        else:
-            error = "Форма была неверной"
-    form = PlayForm()
+        error = "Форма была неверной"
+    else:
+        form = PlayForm()
+        error = ""
     context = {
         "form": form,
         "error": error,
     }
-
     return render(request, "plays/create_play.html", context)
 
 
 def play(request):
     play_id = request.GET.get("play_id")
-
-    this_play = Play.objects.filter(play_id=play_id)
-    if this_play:
-        this_play = this_play[0]
-    else:
-        return redirect("plays")
-
+    this_play = get_object_or_404(Play, play_id=play_id)
     context = {"play_id": play_id, "this_play": this_play}
     return render(request, "plays/play_site.html", context)
 
 
 def records(request):
-    form = FilterRecordsForm()
-    play_id = request.GET.get("play_id")
+    form = FilterRecordsForm(request.GET or None)
+    records_list = Record.objects.order_by("-record_id")
 
-    if play_id:
-        this_play = Play.objects.filter(play_id=play_id)[0]
-        records_list = Record.objects.filter(play=this_play).order_by("record_id").reverse()
-    else:
-        records_list = Record.objects.order_by("record_id").reverse()
-
-    if not form.is_valid():
-        for f in form:
-            print("ERROR: ", f.field, f.errors)
-
-    return render(
-        request,
-        "plays/records.html",
-        {
-            "title": "Все записи",
-            "records": records_list,
-            "form": form,
-        },
-    )
+    if form.is_valid():
+        play = form.cleaned_data.get('play')
+        if play:
+            records_list = records_list.filter(play=play)
+    return render(request, "plays/records.html", {"title": "Все записи", "records": records_list, "form": form})
 
 
 def create_record(request):
-    error = ""
     if request.method == "POST":
         form = RecordForm(data=request.POST, files=request.FILES)
         if form.is_valid() and form.check_duplicates():
             form.save()
             return redirect("records")
-        errors_list = []
-        for field, errors in form.errors.items():
-            for error in errors:
-                errors_list.append(f"{field}: {error}")
-
+        errors_list = form.errors.get_json_data(escape_html=True)
         if not form.check_duplicates():
             errors_list.append(
-                "Нельзя дважды регистрироваться на одну и ту же постановку!"
-            )
-
-        context = {
-            "form": form,
-            "errors_list": errors_list,
-        }
-        print(errors_list)
-        return render(request, "plays/create_record.html", context)
-    if Play.objects.exists():
-        play_id = request.GET.get("play_id")
-        if play_id:
-            selectd_play = Play.objects.filter(play_id=play_id)[0]
-        else:
-            selectd_play = Play.objects.latest("date")
+                {"field": "__all__", "message": "Нельзя дважды регистрироваться на одну и ту же постановку!"})
     else:
-        selectd_play = None
-    first_name, last_name = None, None
-    if request.user.is_authenticated:
-        first_name = request.user.first_name
-        last_name = request.user.last_name
-    print(f"user is non/authorised as {first_name} {last_name}")
-    form = RecordForm(play=selectd_play, first_name=first_name, last_name=last_name)
+        if Play.objects.exists():
+            play_id = request.GET.get("play_id")
+            selected_play = get_object_or_404(Play, play_id=play_id) if play_id else Play.objects.latest("date")
+        else:
+            selected_play = None
 
-    context = {
-        "form": form,
-        "error": error,
-    }
+        if request.user.is_authenticated:
+            form = RecordForm(play=selected_play, first_name=request.user.first_name, last_name=request.user.last_name)
+        else:
+            form = RecordForm(play=selected_play)
+        errors_list = []
 
+    context = {"form": form, "errors_list": errors_list}
     return render(request, "plays/create_record.html", context)

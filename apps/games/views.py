@@ -5,16 +5,16 @@ from apps.plays.models import Play
 
 
 def games(request):
-    games = Game.objects.order_by("game_id")
+    all_games = Game.objects.order_by("game_id")
     plays_list = {}
-    for game in games:
+    for game in all_games:
         plays_list[game] = Play.objects.filter(game=game).order_by("date").reverse()[:5]
     return render(
         request,
         "games/games.html",
         {
             "title": "Все игры",
-            "games": games,
+            "games": all_games,
             "plays_list": plays_list,
         },
     )

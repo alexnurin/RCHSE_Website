@@ -1,6 +1,5 @@
 from django.db import models
 from datetime import datetime
-from datetime import time
 from apps.games.models import Game
 
 
