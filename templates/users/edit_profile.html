@@ -1,0 +1,11 @@
+{% extends 'main/template.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h2>Редактировать профиль</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Отправить</button>
+</form>
+{% endblock %}

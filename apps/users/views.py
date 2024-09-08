@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render, redirect
-from two_factor.views import SetupCompleteView
-from .forms import NewUserForm
+from .forms import NewUserForm, UserProfileForm
 from .models import User
 from django.contrib.auth.models import Group
 from django.contrib.auth import login as auth_login, authenticate
@@ -44,16 +43,37 @@ class CustomLoginView(View):
         return render(request, 'users/login.html', {'form': form})
 
 
-def users(request):
-    all_users = User.objects.order_by("-last_login")
-    return render(request, "users/users.html", {"title": "Пользователи", "users": all_users})
+def all_users(request):
+    all_users_list = User.objects.order_by("-last_login")
+    return render(request, "users/users.html", {"title": "Пользователи", "users": all_users_list})
 
 
 def profile(request):
+    user = request.user
+    form = UserProfileForm(instance=user)
+
+    if request.method == "POST":
+        form = UserProfileForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+
     context = {
-        "title": "Пользователь",
+        "title": "Пользователь", 'user': user, 'form': form
     }
     return render(request, "users/profile.html", context)
+
+
+def edit_profile(request):
+    user = request.user
+    if request.method == "POST":
+        form = UserProfileForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = UserProfileForm(instance=user)
+
+    return render(request, 'edit_profile.html', {'form': form})
 
 
 def user_logout(request):
@@ -75,4 +95,4 @@ def assign_moderator(request, user_id):
     moderator_group = Group.objects.get(name='Moderators')
     user.groups.add(moderator_group)
     return redirect('users')
- # Замените 'home' на имя вашего маршрута главной страницы
+# Замените 'home' на имя вашего маршрута главной страницы

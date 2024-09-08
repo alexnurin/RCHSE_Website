@@ -1,6 +1,7 @@
 from django.forms import EmailField, TextInput
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import User
+from django import forms
 
 
 class NewUserForm(UserCreationForm):
@@ -45,3 +46,23 @@ class NewUserForm(UserCreationForm):
 class LoginUserForm(AuthenticationForm):
     class Meta:
         model = User
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ("first_name", "last_name")
+        widgets = {
+            "first_name": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Введите имя",
+                }
+            ),
+            "last_name": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Введите фамилию",
+                }
+            ),
+        }

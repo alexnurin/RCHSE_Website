@@ -3,7 +3,7 @@ from two_factor.urls import urlpatterns as tf_urls
 from . import views
 
 urlpatterns = [
-    path("users", views.users, name="users"),
+    path("users", views.all_users, name="users"),
     path("register", views.register, name="register"),
     path("login", views.CustomLoginView.as_view(), name="login"),
     path("login_via_vk", views.login_via_vk, name="login_via_vk"),

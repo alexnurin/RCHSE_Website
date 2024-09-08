@@ -1,17 +1,26 @@
 {% extends 'main/template.html' %}
 
 {% block title %}
-{{ title }}
+    {{ title }}
 {% endblock %}
 
 {% block content %}
 
-{% if user.is_authenticated %}
-<h1>Приветствуем, {{ user.first_name }} {{ user.last_name }}!</h1>
-<a href="{% url 'logout' %}">Выйти</a>
-<p>login: {{ user }}</p>
-{% else %}
-<h2>Ты не залогинен!</h2>
-{% endif %}
+    {% if user.is_authenticated %}
+        <h1>Приветствуем, {{ user.first_name }} {{ user.last_name }}!</h1>
+        <a href="{% url 'logout' %}">Выйти</a>
+        <p>login: {{ user }}</p>
+        <h2>Редактировать профиль:</h2>
+        <button onclick="document.getElementById('editProfileForm').style.display = 'block'">Редактировать</button>
+        <div id="editProfileForm" style="display: none;">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Сохранить изменения</button>
+            </form>
+        </div>
+    {% else %}
+        <h2>Ты не залогинен!</h2>
+    {% endif %}
 
 {% endblock %}
